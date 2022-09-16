@@ -11,7 +11,7 @@ highlight: tango
 
 `r birthweight = read.table("birthweight.txt",header=TRUE)`
 
-The point estimate for mu is `r round(mean(birthweight$birthweight), 3)`.
+The point estimate for $\mu$ is `r round(mean(birthweight$birthweight), 3)`.
 
 The p-value `r round(shapiro.test(birthweight$birthweight)$p.value, 4)` of the Shapiro-Wilk-Test suggests, that the hypothesis that the data is normally distributed is not rejected. 
 
@@ -35,7 +35,7 @@ low = mu - error_margin
 up = mu + error_margin
 ```
 
-n = `r round(n, 3)`; mu = `r round(mu, 3)`; s = `r round(s, 3)`
+n = `r round(n, 3)`; $\mu$ = `r round(mu, 3)`; s = `r round(s, 3)`
 
 The 90% Confidence interval is [`r round(low, 3)`, `r round(up, 3)`]
 
