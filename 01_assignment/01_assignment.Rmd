@@ -7,6 +7,50 @@ fontsize: 11pt
 highlight: tango
 ---
 
+## Exercise 1.1.a
+
+`r birthweight = read.table("birthweight.txt",header=TRUE)`
+
+The point estimate for mu is `r mean(birthweight$birthweight)`.
+
+The p-value `r shapiro.test(birthweight$birthweight)$p.value` of the Shapiro-Wilk-Test suggests, that the hypothesis that the data is normally distributed is not rejected. 
+
+Histogram and QQPlot of the data also suggest, that the data is approximately normally distributed
+
+
+```{r,echo=FALSE,fig.height=3.5}
+par(mfrow=c(1,2))
+qqnorm(birthweight$birthweight)
+qqline(birthweight$birthweight, col = "red")
+hist(birthweight$birthweight)
+```
+
+## Exercise 1.1.b
+
+```{r,echo=FALSE}
+n = nrow(birthweight); mu = mean(birthweight$birthweight); s = sd(birthweight$birthweight)
+error_margin = qt(0.90,df=n-1)*s/sqrt(n)
+
+low = mu - error_margin 
+up = mu + error_margin
+```
+
+n = `r n`; mu = `r mu`; s = `r s`
+
+The 90% Confidence interval is [`r low`, `r up`]
+
+## Exercise 1.1.c
+```{r}
+t.test(birthweight$birthweight, mu = 2800, alternative = "greater")
+```
+
+## Exercise 1.1.d
+The Student T-Test from Exercise 1.1.c is one-sided, because we were only interested whether the birthweight mean is bigger than 2800 or not.
+
+
+---
+# TODO REMOVE EVERYTHING BELOW HERE ONCE DONE
+
 ## Introduction to R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax 
