@@ -110,7 +110,7 @@ Assuming normality of the data, we can say with 90% confidence that the mean tem
 
 # Exercise 1.4
 ## Exercise 1.4.a
-The chi-square test of homogeneity tests whether two datasets are coming from the same population. This seems to fit to the question how well the author imitates Austen's style of writing.
+Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer.
 
 ## Exercise 1.4.b
 ## Exercise 1.4.c
