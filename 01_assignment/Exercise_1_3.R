@@ -19,8 +19,10 @@ boxplot(weather$humidity, main='Boxplot of Humidity')
 boxplot(weather$temperature, main='Boxplot of Temperature')
 
 # Exercise 1.3.b
-par(mfrow=c(2,3))
-hist(weather$temperature, main = 'Histogram of Temperature')
+x = seq(min(weather$temperature), max(weather$temperature), by=1)
+par(mfrow=c(1,1))
+hist(weather$temperature, main = 'Histogram of Temperature', prob=T)
+curve(dnorm(x, mean=mean(weather$temperature), sd=sd(weather$temperature)), lwd=2, col="red", add=TRUE, yaxt="n")
 qqnorm(weather$temperature, main = 'QQPlot of Temperature')
 qqline(weather$temperature, col = "red")
 boxplot(weather$temperature, main='Boxplot of Temperature')

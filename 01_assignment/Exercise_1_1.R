@@ -12,13 +12,13 @@ if(test_result$p.value > 0.05) {
 }
 
 par(mfrow=c(1,2))
-qqnorm(birthweight$birthweight)
+qqnorm(birthweight$birthweight, main="QQPlot of Birthweight")
 qqline(birthweight$birthweight, col = "red")
-hist(birthweight$birthweight)
+hist(birthweight$birthweight, main="Histogram of Birthweight")
 
 # Exercise 1.1.b
-n = nrow(birthweight); mu = birthweight_mean; s = sd(birthweight$birthweight)
-error_margin = qt(0.90,df=n-1)*s/sqrt(n)
+n = nrow(birthweight); mu = mean(birthweight$birthweight); s = sd(birthweight$birthweight)
+error_margin = qt(p=(1-0.9)/2,df=n-1, lower.tail = FALSE)*s/sqrt(n)
 
 low = mu - error_margin 
 up = mu + error_margin
