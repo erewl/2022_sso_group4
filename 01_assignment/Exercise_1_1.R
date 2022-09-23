@@ -1,4 +1,4 @@
-setwd('/Users/katringrunert/Projects/Uni/sso/exercises/')
+setwd('/Users/katringrunert/Projects/Uni/sso/exercises/01_assignment')
 
 # Exercise 1.1.a
 birthweight = read.table("birthweight.txt",header=TRUE)

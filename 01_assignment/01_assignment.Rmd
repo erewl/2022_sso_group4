@@ -1,7 +1,7 @@
 ---
-title: "Assignment 1"
-author: "Katrin Grunert, Carmen Byrne, Bono ???"
-date: "16 September 2022"
+title: "Assignment 1 - Group 4"
+author: "Katrin Grunert, Carmen Byrne, Bono Lardinois"
+date: "22 September 2022"
 output: pdf_document
 fontsize: 11pt
 highlight: tango
@@ -65,6 +65,8 @@ The Student T-Test from Exercise 1.1.c is one-sided, because we were only intere
 
 # Exercise 1.4
 ## Exercise 1.4.a
+The chi-square test of homogeneity tests whether two datasets are coming from the same population. This seems to fit to the question how well the author imitates Austen's style of writing.
+
 ## Exercise 1.4.b
 ## Exercise 1.4.c
 ## Exercise 1.4.d
