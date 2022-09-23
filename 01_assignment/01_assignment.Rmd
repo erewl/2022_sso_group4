@@ -1,8 +1,10 @@
 ---
 title: "Assignment 1 - Group 4"
-author: "Katrin Grunert, Carmen Byrne, Bono Lardinois"
+author: "Katrin Grunert, Carmen Byrne Salsas, Bono Lardinois"
 date: "22 September 2022"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 fontsize: 11pt
 highlight: tango
 ---
@@ -107,6 +109,26 @@ up = mu + error_margin
 Assuming normality of the data, we can say with 90% confidence that the mean temperature of the population lays in the range of [`r round(low,3)`, `r round(up, 3)`]
 
 ## Exercise 1.3.d
+For a large sample size $n$, a t-statistic at a significance level $\alpha$ can be approximated by a z-statistic. In our case, this is a necessary step since the sample size is unknown; therefore, we cannot specify in advance the degrees of freedom of the t-statistic. 
+
+By the central limit theorem, the sample mean is normally distributed. Thus, the formula for a 95% confidence interval around the mean $\mu$  with standard deviation $\sigma$ is: 
+$\mu \pm E$, where E is the margin of error defined as $E = z_{\alpha/2} \frac{\sigma}{\sqrt n}$. 
+
+For a large sample size, the population standard deviation $\sigma$ is approximately equal to the sample standard deviation $s$. Solving for $n$, we find the following expression for the minimum sample size for a confidence interval of length $2 E$ at a significance level $\alpha$:
+
+$n \geq \frac{(z_{\alpha/2} s)^2}{E^2}$
+
+```{r}
+ci_length = 2
+E = ci_length/2
+alpha = 0.05
+z_stat = qnorm(alpha/2, lower.tail=FALSE)
+s_humidity = sd(weather$humidity)
+n = (z_stat^2)*(s_humidity^2)/E^2
+```
+
+Thus, the minimum sample size for a 95% confidence interval for the mean humidity with maximum length 2% is `r ceiling(n)`.
+
 
 # Exercise 1.4
 ## Exercise 1.4.a
