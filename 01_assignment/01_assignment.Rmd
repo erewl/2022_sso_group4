@@ -19,11 +19,11 @@ highlight: tango
 
 The point estimate for the population mean is `r round(mean(birthweight$birthweight), 3)`.
 
-For the Shapiro-Wilk-Test we formulate the Null and Alternative Hypotheses as follows:
+For the Shapiro-Wilk-Test we formulate the null and alternative Hypotheses as follows:
 
-**H_null**:  The data is normally distributed.
+$H_0$:  The data is normally distributed.
 
-**H_alt**: The data is not normally distributed.
+$H_1$: The data is not normally distributed.
 
 Since the  p-value `r round(shapiro.test(birthweight$birthweight)$p.value, 4)` is greater than 0.05, we will not reject the null hypothesis, stating the data may be normally distributed. 
 
@@ -47,8 +47,10 @@ n = nrow(birthweight); mu = mean(birthweight$birthweight); s = sd(birthweight$bi
 sample size n = `r round(n, 3)`; population $\mu$ = `r round(mu, 3)`; sample standard deviation = `r round(s, 3)`; $\alpha$ = 0.05 (90% CI two-sided)
 
 ```{r}
-n = nrow(birthweight); mu = mean(birthweight$birthweight); s = sd(birthweight$birthweight)
-error_margin = qt(p=(1-0.9)/2,df=n-1, lower.tail = FALSE)*s/sqrt(n)
+alpha = (1-0.9)/2
+n = nrow(birthweight); mu = mean(birthweight$birthweight)
+s = sd(birthweight$birthweight)
+error_margin = qt(p=alpha, df=n-1, lower.tail = FALSE)*s/sqrt(n)
 
 lower_bound = mu - error_margin 
 upper_bound = mu + error_margin
@@ -59,9 +61,9 @@ The 90% Confidence Interval is constructed with the help of the student t-distri
 ## Exercise 1.1.c
 For the t-test we formulate the null and alternative hypotheses as follows:
 
-**H_null**: mean_birthweight = 2800
+$H_0$: mean_birthweight = 2800
 
-**H_alt**: mean birthweight > 2800
+$H_1$: mean_birthweight > 2800
 
 This is also known as a right-tailed test.
 
@@ -73,7 +75,7 @@ We have sufficient evidence to verify the experts claim that the mean birthweigh
 
 
 ## Exercise 1.1.d
-The Student T-Test from Exercise 1.1.c is one-sided, because we were interested whether the birthweight mean is bigger than 2800, resulting in a right-tailed and not a two-sided test.
+The Student T-Test from Exercise 1.1.c is one-tailed, because we were interested whether the birthweight mean is bigger than 2800, resulting in a right-tailed and not a two-tailed test.
 
 
 # Exercise 1.2
@@ -81,19 +83,17 @@ The Student T-Test from Exercise 1.1.c is one-sided, because we were interested 
 
 From a fictive sample (n = 200) of working parents, 140 parents receive childcare benefits. This report section will investigate the fraction (p) of working parents that receive childcare benefits—starting with calculating the point estimate for p. The point estimate of p is the chance of success. In this case, success means having child benefits. This is done by dividing the number of parents with child benefits (140) by the total sample size (200). In this case, this will be:
 
-p-hat = 140/200 = `r round(140/200,3)`
+$\hat{p}$ = 140/200 = `r round(140/200,3)`
 
 ## Exercise 1.2.b
 
 ```{r, echo=FALSE}
 n = 200
-# p 
-p = 140/n
-# q 
-q = 1 - p
+p_hat = 140/n
+q_hat = 1 - p_hat
 ```
 
-To derive a 99% confidence interval for the p-hat, we first need to calculate the chance of failure (q). To estimate the chance of failure (no child benefit), we use the formula q = 1 - p. In this case, the q-hat is `r round(1-p,3)`.
+To derive a 99% confidence interval for the $\hat{p}$, we first need to calculate the chance of failure (q). To estimate the chance of failure (no child benefit), we use the formula $\hat{q} = 1 - \hat{p}$. In this case, the $\hat{q}$ is `r round(1-p_hat,3)`.
 
 
 ```{r, results='hide'}
@@ -105,18 +105,15 @@ round(z_alpha, 3)
 Next, we can derive the z-value, `z_alpha`, with the `q-norm` function from R. When we fill in the alpha level of 0.99, we get a z-alpha of `r round(z_alpha,3)`.
 
 ```{r, results='hide'}
-# upperbound
-upper = p + (z_alpha)*sqrt((p*q)/n)
-# lowerbound
-lower = p - (z_alpha)*sqrt((p*q)/n)
-CI = c(lower, upper)
+upper_bound = p_hat + (z_alpha)*sqrt((p_hat*q_hat)/n)
+lower_bound = p_hat - (z_alpha)*sqrt((p_hat*q_hat)/n)
 ```
 
-With the z-value, the probability of success p-hat, the probability of failure q-hat, and the sample size, we can calculate the upper and lower bound of the 99% confidence interval. This results in the following confidence interval [`r round(lower,3)`, `r round(upper,3)`].
+With the z-value, the probability of success $\hat{p}$, the probability of failure $\hat{q}$, and the sample size, we can calculate the upper and lower bound of the 99% confidence interval. This results in the following confidence interval [`r round(lower_bound,3)`, `r round(upper_bound,3)`].
 
 ## Exercise 1.2.c
 
-Finally, we will test the null hypothesis that the true fraction of working parents who receive childcare benefits is equal to 75%. Namely, H0: $p = p_0 = 0.75$, H1: $p \neq 0.75$.
+Finally, we will test the null hypothesis that the true fraction of working parents who receive childcare benefits is equal to 75%. Namely, $H_0: p = p_0 = 0.75$, $H_1: p \neq 0.75$.
 
 To test this, we will make use of a binomial test. The binomial test can be used to determine whether the population proportion of one level in a dichotomous variable equals a specific claimed value. In our case, we are dealing with a dichotomous variable because parents either have child benefits or do not.
 
@@ -135,8 +132,8 @@ The third test was conducted at a significance level equal to 0.01, yielding the
 
 ```{r}
 test_90 = binom.test(140,200, p = 0.75, conf.level = 0.9)
-test_85 = binom.test(140,200, p = 0.75,conf.level = 0.85)
-test_99 = binom.test(140,200, p = 0.75,conf.level = 0.99)
+test_85 = binom.test(140,200, p = 0.75, conf.level = 0.85)
+test_99 = binom.test(140,200, p = 0.75, conf.level = 0.99)
 
 tab <- matrix(c(
   round(test_99$conf.int[1], 3), 
@@ -274,7 +271,7 @@ The inconsistencies lay in Sense in the words 'without' and 'a', in Emma the mai
 
 ## Exercise 1.4.c
 
-To check whether the admirer was successfully imitating Austen's writing style, we can compare the chapters from the Sanditon book. For this, we made a new dataframe and performed another chi-squared test. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
+To check whether the admirer was successfully imitating Austen's writing style, we can compare the chapters from the Sanditon book. For this, we made a new data frame and performed another chi-squared test. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
 ```{r}
 df_2 <- austen[c("Sand1", "Sand2")]
 austen_chi_2 = chisq.test(df_2)
@@ -290,4 +287,4 @@ As in 1.4.b, we will use the residuals to determine the main inconsistencies bet
 residuals(austen_chi_2)
 ```
 
-The residuals table above shows, that the admirer was using the word 'without' less than austen and the word 'an' more often than the original author.
+The residuals table above shows, that the admirer was using the word 'without' less than Austen and the word 'an' more often than the original author.
