@@ -234,7 +234,8 @@ We can see four columns and six rows in the dataset described below. The respect
 austen
 ```
 
-Testing for independence or homogeneity depends on the topic of interest. With independence testing, there is one large sample, and then you are testing whether the row and column variables differ significantly. With testing for homogeneity, samples are taken from different populations, with one sample per column. Here we test whether the columns differ significantly from each other. Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or differ. We will use the Homogeneity test to look for a difference between the columns.
+Testing for independence or homogeneity depends on the topic of interest. 
+Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or differ. We will use the Homogeneity test to look for a difference between the columns.
 
 
 ## Exercise 1.4.b
@@ -242,9 +243,20 @@ Testing for independence or homogeneity depends on the topic of interest. With i
 
 To test whether Austen was consistent in her use of words throughout the writing of her books, we performed a chi-squared test. The H0, in this case, is that row categories are the same for each column. The H1 is that the distribution among the row categories is not the same for each column.
 
-The chi-squared test is used to compare observed results and expected results. Its purpose is discovering whether there is a significant difference between the observed and the expected data.
+The chi-squared test is used to compare observed results and expected results. Its purpose is to discover whether there is a significant difference between the observed and the expected data.
 
-To test only the books/chapter of Austen, we created a subset with only the books/chapters that were written by Austen. With this new dataset, we performed a chi-squared test. This gives us a p-value of 0.161. This p-value is > 0.05, meaning we cannot reject the null hypothesis and state that there is a significant difference between the different columns (books/chapters) in the data frame. 
+To check the condition of the chi-squared test: At least 80% of the expected values should be at least 5. We took the expected table from the chi-squared test and made a boolean statement (Expected > 5). This table showed that every cell has a value greater than 5, meaning the condition is met.  
+
+```{r, echo=FALSE}
+df_1 <- austen[c("Sense","Emma", "Sand1")]
+austen_chi_1 = chisq.test(df_1)
+```
+
+```{r}
+austen_chi_1$expected > 5
+```
+
+After the precondition for the chi-squared test is verified, we create a subset with only the books/chapters that were written by Austen, in order to test whether she was consistent in her own writing. With this new dataset, we perform a chi-squared test. This gives us a p-value of 0.161. This p-value is > 0.05, meaning we cannot reject the null hypothesis and state that there is a significant difference between the different columns (books/chapters) in the data frame. 
 
 ```{r}
 df_1 <- austen[c("Sense","Emma", "Sand1")]
@@ -252,14 +264,17 @@ austen_chi_1 = chisq.test(df_1)
 round(austen_chi_1$p.value, 3)
 ```
 
-To check the condition of the chi-squared test: At least 80% of the expected values should be at least 5. We took the expected table from the chi-squared test and made a boolean statement (Expected > 5). This table showed that every cell has a value greater than 5, meaning the condition is met.  
+Next, we will determine where the main inconsistencies lay. Inconsistencies can be defined as where the expected values diverge the most from the observed values, these differences are also called residuals.
 
 ```{r}
-austen_chi_1$expected > 5
+residuals(austen_chi_1)
 ```
+
+The inconsistencies lay in Sense in the words 'without' and 'a', in Emma the main inconsistency was the word 'without' and lastly, in Sanditon the two main inconsistencies were the words 'that' and 'a'. The sign of the residuals indicate whether a word has been used more often or less often compared to the other books.
+
 ## Exercise 1.4.c
 
-To check whether the admirer was any good at imitating Austen's writing style, we can compare the chapters from the Sandition book. For this, we made a new data frame and performed another chi-squared. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
+To check whether the admirer was successfully imitating Austen's writing style, we can compare the chapters from the Sanditon book. For this, we made a new dataframe and performed another chi-squared test. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
 ```{r}
 df_2 <- austen[c("Sand1", "Sand2")]
 austen_chi_2 = chisq.test(df_2)
@@ -268,3 +283,11 @@ round(austen_chi_2$p.value, 3)
 ```{r}
 austen_chi_2$expected > 5
 ```
+
+As in 1.4.b, we will use the residuals to determine the main inconsistencies between the author and Austen.
+
+```{r}
+residuals(austen_chi_2)
+```
+
+The residuals table above shows, that the admirer was using the word 'without' less than austen and the word 'an' more often than the original author.
