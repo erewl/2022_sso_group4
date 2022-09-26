@@ -284,7 +284,7 @@ round(austen_chi_2$p.value, 3)
 austen_chi_2$expected > 5
 ```
 
-As in 1.4.b, we will use the residuals to determine the main inconsistencies between the author and Austen.
+As in 1.4.b, we will use the residuals to determine the main inconsistencies between the Austen's admirer and the original author.
 
 ```{r}
 residuals(austen_chi_2)
