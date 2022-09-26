@@ -1,10 +1,8 @@
 ---
 title: "Assignment 1 - Group 4"
 author: "Katrin Grunert, Carmen Byrne Salsas, Bono Lardinois"
-date: "22 September 2022"
-output:
-  html_document:
-    df_print: paged
+date: "26 September 2022"
+output: pdf_document
 fontsize: 11pt
 highlight: tango
 ---
@@ -81,7 +79,8 @@ The Student T-Test from Exercise 1.1.c is one-sided, because we were interested 
 # Exercise 1.2
 ## Exercise 1.2.a
 
-From a fictive sample (n = 200) of working parents, 140 parents receive childcare benefits. This report section will investigate the fraction (p) of working parents that receive childcare benefits—starting with calculating the point estimate for p. The point estimate of p is the chance of success. In this case, success means having child benefits. This is done by dividing the number of parents with child benefits (140) by the total sample size (200). In this case, this will be:\n
+From a fictive sample (n = 200) of working parents, 140 parents receive childcare benefits. This report section will investigate the fraction (p) of working parents that receive childcare benefits—starting with calculating the point estimate for p. The point estimate of p is the chance of success. In this case, success means having child benefits. This is done by dividing the number of parents with child benefits (140) by the total sample size (200). In this case, this will be:
+
 p-hat = 140/200 = `r round(140/200,3)`
 
 ## Exercise 1.2.b
@@ -94,37 +93,40 @@ p = 140/n
 q = 1 - p
 ```
 
-To derive a 99% confidence interval for the p-hat we first need to calculate the chance of failure (q). To estimate the chance of failure (no child benefit), we use the formula q = 1 - p. In this case, the q-hat is `r round(1-p,3)`.\n
+To derive a 99% confidence interval for the p-hat, we first need to calculate the chance of failure (q). To estimate the chance of failure (no child benefit), we use the formula q = 1 - p. In this case, the q-hat is `r round(1-p,3)`.
+
 
 ```{r, results='hide'}
-z_alpha = qnorm(0.99)
+alpha = 0.01
+z_alpha = qnorm(1 - (alpha/2))
 round(z_alpha, 3)
 ```
 
-Next, we can derive the z-value, z_alpha, with the q-norm function from R. When we fill in the alpha level of 0.99, we get a z-alpha of `r round(z_alpha,3)`.
+Next, we can derive the z-value, `z_alpha`, with the `q-norm` function from R. When we fill in the alpha level of 0.99, we get a z-alpha of `r round(z_alpha,3)`.
 
 ```{r, results='hide'}
 # upperbound
-upper = p + z_alpha/2*sqrt((p*q)/n)
+upper = p + (z_alpha)*sqrt((p*q)/n)
 # lowerbound
-lower = p - z_alpha/2*sqrt((p*q)/n)
+lower = p - (z_alpha)*sqrt((p*q)/n)
 CI = c(lower, upper)
-print(round(CI, 3))
 ```
 
 With the z-value, the probability of success p-hat, the probability of failure q-hat, and the sample size, we can calculate the upper and lower bound of the 99% confidence interval. This results in the following confidence interval [`r round(lower,3)`, `r round(upper,3)`].
 
 ## Exercise 1.2.c
 
-Finally, we will test the null hypothesis that the true fraction of working parents who receive childcare benefits is equal to 75%. Namely, H0: $p = p_0 = 0.75$, H1: $p \neq 0.75$.\n
-To test this, we will make use of a binomial test. The binomial test can be used to determine whether the population proportion of one level in a dichotomous variable equals a specific claimed value. In our case, we are dealing with a dichotomous variable because parents either have child benefits or do not. \n
-For the binomial test, we need the following variables: number of success (140), sample size (200), and the hypothesized proportion of working parents who receive childcare benefits (0.75).\n 
+Finally, we will test the null hypothesis that the true fraction of working parents who receive childcare benefits is equal to 75%. Namely, H0: $p = p_0 = 0.75$, H1: $p \neq 0.75$.
+
+To test this, we will make use of a binomial test. The binomial test can be used to determine whether the population proportion of one level in a dichotomous variable equals a specific claimed value. In our case, we are dealing with a dichotomous variable because parents either have child benefits or do not.
+
+For the binomial test, we need the following variables: number of success (140), sample size (200), and the hypothesized proportion of working parents who receive childcare benefits (0.75).
 
 The p-value for this binomial test is approximately equal to 0.103 independently of the significance level.
 
-The first test was conducted at a significance level $\alpha$ equal to 0.1, conveying a confidence interval (CI) of (1 - 0.1) 90%. Since the p-value (0.103) is larger than the significance level (0.01) we fail to reject the null hypothesis. In addition, the test resulted in a confidence interval of [0.642, 0.753]. We can see that $p_0 = 0.75$ falls inside this interval. This supports our previous assumption that there is not enough evidence to reject the null hypothesis at this significance level. Note that $p_0$ is only barely included in the confidence interval. \n
+The first test was conducted at a significance level $\alpha$ equal to 0.1, conveying a confidence interval (CI) of (1 - 0.1) 90%. Since the p-value (0.103) is larger than the significance level (0.01) we fail to reject the null hypothesis. In addition, the test resulted in a confidence interval of [0.642, 0.753]. We can see that $p_0 = 0.75$ falls inside this interval. This supports our previous assumption that there is not enough evidence to reject the null hypothesis at this significance level. Note that $p_0$ is only barely included in the confidence interval.
 
-The second test used a significance level $\alpha$ equal to  0.15, yielding the following 85% confidence interval: [0.649, 0.747]. In this case the p-value (0.103) is smaller than the significance level (0.15) which suggests that there is enough evidence to reject the null hypothesis, this is supported by the fact that the confidence interval does not contain the p-value (0.75). However, this conclusion should be taken with a grain of salt since generally a 85% confidence level is not considered sufficiently accurate to provide any reliable conclusions. \n
+The second test used a significance level $\alpha$ equal to  0.15, yielding the following 85% confidence interval: [0.649, 0.747]. In this case the p-value (0.103) is smaller than the significance level (0.15) which suggests that there is enough evidence to reject the null hypothesis, this is supported by the fact that the confidence interval does not contain the p-value (0.75). However, this conclusion should be taken with a grain of salt since generally a 85% confidence level is not considered sufficiently accurate to provide any reliable conclusions.
 
 
 The third test was conducted at a significance level equal to 0.01, yielding the following 99% confidence interval: [0.610, 0.780].In this case the p-value (0.103) is larger than the significance level, and the confidence interval contains the hypothesized true proportion of working parents with childcare benefits, which suggests that there is not enough evidence to reject the null hypothesis $H_0$.
@@ -136,7 +138,13 @@ test_90 = binom.test(140,200, p = 0.75, conf.level = 0.9)
 test_85 = binom.test(140,200, p = 0.75,conf.level = 0.85)
 test_99 = binom.test(140,200, p = 0.75,conf.level = 0.99)
 
-tab <- matrix(c(test_99$conf.int, test_90$conf.int, test_85$conf.int, test_99$conf.int[2], test_90$conf.int[2], test_85$conf.int[2]), ncol=2,nrow = 3, byrow=TRUE)
+tab <- matrix(c(
+  round(test_99$conf.int[1], 3), 
+  round(test_90$conf.int[1], 3), 
+  round(test_85$conf.int[1], 3), 
+  round(test_99$conf.int[2], 3), 
+  round(test_90$conf.int[2], 3), 
+  round(test_85$conf.int[2], 3)), ncol=2,nrow = 3, byrow=TRUE)
 colnames(tab) <- c("lower", "Upper")
 rownames(tab) <- c('Alpha 0.01','Alpha 0.1','Alpha 0.15')
 tab <- as.table(tab)
@@ -158,8 +166,8 @@ par(mfrow=c(1,2))
 boxplot(weather$humidity, main='Boxplot of Humidity')
 boxplot(weather$temperature, main='Boxplot of Temperature')
 ```
-The summary table and the boxplot of the temperature data show a greater range of values (see Min and Max values) in the temperature than in the humidity. Notably, we can see that the humidity values are approximately symetrically distributed around the median. On the other hand, the values smaller than the median temperature have a larger range than those that are larger than the median.
-In both summaries of humidity and temperature, no severe outliers can be found, as Mean and Median are close to each other and no outliers are being displayed in the boxplots.
+The summary table and the boxplot of the temperature data show a greater range of values (see Min and Max values) than in the humidity. Notably, we can see that the humidity values are approximately symmetrically distributed around the median. On the other hand, the values smaller than the median temperature have a larger range than those that are larger than the median.
+In both summaries of humidity and temperature, no severe outliers can be found, as mean and median are close to each other and no outliers are being displayed in the boxplots.
 
 When plotting both data in a scatterplot (below), no clear correlation can be found between humidity and temperature.
 
@@ -183,15 +191,15 @@ qqline(weather$temperature, col = "red")
 
 ## Exercise 1.3.c
 
-```{r,echo=FALSE}
+```{r}
 n = nrow(weather); mu = mean(weather$temperature); s = sd(weather$temperature)
 error_margin = qt((1-0.90)/2,df=n-1, lower.tail=FALSE)*s/sqrt(n)
 
-low = mu - error_margin 
-up = mu + error_margin
+lower_bound = mu - error_margin 
+upper_bound = mu + error_margin
 ```
 
-Assuming normality of the data, we can say with 90% confidence that the mean temperature of the population lays in the range of [`r round(low,3)`, `r round(up, 3)`]
+Assuming normality of the data, we can say with 90% confidence that the mean temperature of the population lays in the range of [`r round(lower_bound, 3)`, `r round(upper_bound, 3)`]
 
 ## Exercise 1.3.d
 For a large sample size $n$, a t-statistic at a significance level $\alpha$ can be approximated by a z-statistic. In our case, this is a necessary step since the sample size is unknown; therefore, we cannot specify in advance the degrees of freedom of the t-statistic.  Therefore, let's assume the sample mean is normally distributed. The formula for a 95% confidence interval around the mean $\mu$  with standard deviation $\sigma$ is: 
@@ -216,25 +224,28 @@ Thus, the minimum sample size for a 95% confidence interval for the mean humidit
 # Exercise 1.4
 ## Exercise 1.4.a
 
+We can see four columns and six rows in the dataset described below. The respective columns mean the following: 
 
-We can see four columns and six rows in the dataset described below. The respective columns mean the following: \n
-* Sense is chapters 1 and 3 of the book Sense and Sensibility by Jane Austen.
-* Emma is chapters 1,2, and 3 from the book Emma by Jane Austen.
-* Sand1 is chapters 1 and 6 of Sanditon by Jane Austen.
-* Sand2 is chapters 12 and 24, Sanditon by an admirer. 
+- Sense is chapters 1 and 3 of the book Sense and Sensibility by Jane Austen.
+- Emma is chapters 1,2, and 3 from the book Emma by Jane Austen.
+- Sand1 is chapters 1 and 6 of Sanditon by Jane Austen.
+- Sand2 is chapters 12 and 24, Sanditon by an admirer. 
 ```{r}
 austen
 ```
 
-Testing for independence or homogeneity depends on the topic of interest. With independence testing, there is one large sample, and then you are testing whether the row and column variables differ significantly. With testing for homogeneity, samples are taken from different populations, with one sample per column. Here we test whether the columns differ significantly from each other. Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or differ. We will use the Homogeneity test to look for a difference between the columns.\n
-\n
+Testing for independence or homogeneity depends on the topic of interest. With independence testing, there is one large sample, and then you are testing whether the row and column variables differ significantly. With testing for homogeneity, samples are taken from different populations, with one sample per column. Here we test whether the columns differ significantly from each other. Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or differ. We will use the Homogeneity test to look for a difference between the columns.
+
 
 ## Exercise 1.4.b
 
-\n
-To test whether Austen was consistent in her use of words throughout the writing of her books, we performed a chi-squared test. The H0, in this case, is that row categories are the same for each column. The H1 is that the distribution among the row categories is not the same for each column.\n
-The chi-squared test is used to compare observed results and expected results. Its purpose is discovering whether there is a significant difference between the observed and the expected data.\n
+
+To test whether Austen was consistent in her use of words throughout the writing of her books, we performed a chi-squared test. The H0, in this case, is that row categories are the same for each column. The H1 is that the distribution among the row categories is not the same for each column.
+
+The chi-squared test is used to compare observed results and expected results. Its purpose is discovering whether there is a significant difference between the observed and the expected data.
+
 To test only the books/chapter of Austen, we created a subset with only the books/chapters that were written by Austen. With this new dataset, we performed a chi-squared test. This gives us a p-value of 0.161. This p-value is > 0.05, meaning we cannot reject the null hypothesis and state that there is a significant difference between the different columns (books/chapters) in the data frame. 
+
 ```{r}
 df_1 <- austen[c("Sense","Emma", "Sand1")]
 austen_chi_1 = chisq.test(df_1)
@@ -242,6 +253,7 @@ round(austen_chi_1$p.value, 3)
 ```
 
 To check the condition of the chi-squared test: At least 80% of the expected values should be at least 5. We took the expected table from the chi-squared test and made a boolean statement (Expected > 5). This table showed that every cell has a value greater than 5, meaning the condition is met.  
+
 ```{r}
 austen_chi_1$expected > 5
 ```
