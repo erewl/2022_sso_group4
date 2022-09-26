@@ -19,15 +19,15 @@ highlight: tango
 
 The point estimate for the population mean is `r round(mean(birthweight$birthweight), 3)`.
 
-For the Shapiro-Wilk-Test we formulate the null and alternative Hypotheses as follows:
+For the Shapiro-Wilk-Test we formulate the null and alternative hypotheses as follows:
 
 $H_0$:  The data is normally distributed.
 
 $H_1$: The data is not normally distributed.
 
-Since the  p-value `r round(shapiro.test(birthweight$birthweight)$p.value, 4)` is greater than 0.05, we will not reject the null hypothesis, stating the data may be normally distributed. 
+Since the p-value of `r round(shapiro.test(birthweight$birthweight)$p.value, 4)` is greater than 0.05, we will not reject the null hypothesis, stating the data may be normally distributed. 
 
-In the QQPlot a straight line can be drawn through most data points, and the Histogram shows a bell-curve like distribution of the data, suggesting, that the data is approximately normally distributed. 
+In the QQPlot a straight line can be drawn through most data points, and the Histogram shows a bell-curve-like distribution of the data, suggesting, that the data is approximately normally distributed. 
 
 
 ```{r,echo=FALSE,fig.height=3.5}
@@ -70,12 +70,12 @@ This is also known as a right-tailed test.
 ```{r}
 t.test(birthweight$birthweight, mu = 2800, alternative = "greater")
 ```
-The p-value (0.0136) of the t-test is less than the significance level 0.05, and therefore we reject the null hypothesis.
-We have sufficient evidence to verify the experts claim that the mean birthweight is greater than 2800.
+The p-value (0.0136) of the t-test is less than the significance level of 0.05, and therefore we reject the null hypothesis.
+We have sufficient evidence to verify the expert's claim that the mean birthweight is greater than 2800.
 
 
 ## Exercise 1.1.d
-The Student T-Test from Exercise 1.1.c is one-tailed, because we were interested whether the birthweight mean is bigger than 2800, resulting in a right-tailed and not a two-tailed test.
+The Student T-Test from Exercise 1.1.c is one-tailed because we were interested in whether the birthweight mean is bigger than 2800, resulting in a right-tailed and not a two-tailed test.
 
 
 # Exercise 1.2
@@ -123,10 +123,9 @@ The p-value for this binomial test is approximately equal to 0.103 independently
 
 The first test was conducted at a significance level $\alpha$ equal to 0.1, conveying a confidence interval (CI) of (1 - 0.1) 90%. Since the p-value (0.103) is larger than the significance level (0.01) we fail to reject the null hypothesis. In addition, the test resulted in a confidence interval of [0.642, 0.753]. We can see that $p_0 = 0.75$ falls inside this interval. This supports our previous assumption that there is not enough evidence to reject the null hypothesis at this significance level. Note that $p_0$ is only barely included in the confidence interval.
 
-The second test used a significance level $\alpha$ equal to  0.15, yielding the following 85% confidence interval: [0.649, 0.747]. In this case the p-value (0.103) is smaller than the significance level (0.15) which suggests that there is enough evidence to reject the null hypothesis, this is supported by the fact that the confidence interval does not contain the p-value (0.75). However, this conclusion should be taken with a grain of salt since generally a 85% confidence level is not considered sufficiently accurate to provide any reliable conclusions.
+The second test used a significance level $\alpha$ equal to  0.15, yielding the following 85% confidence interval: [0.649, 0.747]. In this case, the p-value (0.103) is smaller than the significance level (0.15) which suggests that there is enough evidence to reject the null hypothesis, this is supported by the fact that the confidence interval does not contain the p-value (0.75). However, this conclusion should be taken with a grain of salt since generally an 85% confidence level is not considered sufficiently accurate to provide any reliable conclusions.
 
-
-The third test was conducted at a significance level equal to 0.01, yielding the following 99% confidence interval: [0.610, 0.780].In this case the p-value (0.103) is larger than the significance level, and the confidence interval contains the hypothesized true proportion of working parents with childcare benefits, which suggests that there is not enough evidence to reject the null hypothesis $H_0$.
+The third test was conducted at a significance level equal to 0.01, yielding the following 99% confidence interval: [0.610, 0.780]. In this case, the p-value (0.103) is larger than the significance level and the confidence interval contains the hypothesized true proportion of working parents with childcare benefits, which suggests that there is not enough evidence to reject the null hypothesis $H_0$.
 
 
 
@@ -163,8 +162,8 @@ par(mfrow=c(1,2))
 boxplot(weather$humidity, main='Boxplot of Humidity')
 boxplot(weather$temperature, main='Boxplot of Temperature')
 ```
-The summary table and the boxplot of the temperature data show a greater range of values (see Min and Max values) than in the humidity. Notably, we can see that the humidity values are approximately symmetrically distributed around the median. On the other hand, the values smaller than the median temperature have a larger range than those that are larger than the median.
-In both summaries of humidity and temperature, no severe outliers can be found, as mean and median are close to each other and no outliers are being displayed in the boxplots.
+The summary table and the boxplot of the temperature data show a greater range of values (see Min and Max values) than the humidity data. Notably, we can see that the humidity values are approximately symmetrically distributed around the median. On the other hand, the values smaller than the median temperature have a larger range than those that are larger than the median.
+In both summaries of humidity and temperature, no severe outliers can be found, as the mean and median are close to each other and no outliers are being displayed in the boxplots.
 
 When plotting both data in a scatterplot (below), no clear correlation can be found between humidity and temperature.
 
@@ -232,7 +231,7 @@ austen
 ```
 
 Testing for independence or homogeneity depends on the topic of interest. 
-Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or differ. We will use the Homogeneity test to look for a difference between the columns.
+Since the admirer attempts to imitate Austen's writing style, the contingency table test for homogeneity seems a fitting choice. Generalized, the contingency table test for homogeneity explores whether two datasets are originating from the same population, this maps well to the intention of the admirer. In our case, we want to test for consistency between the different samples, so we want to see whether the columns are the same or different. We will use the Homogeneity test to look for a difference between the columns.
 
 
 ## Exercise 1.4.b
@@ -253,7 +252,7 @@ austen_chi_1 = chisq.test(df_1)
 austen_chi_1$expected > 5
 ```
 
-After the precondition for the chi-squared test is verified, we create a subset with only the books/chapters that were written by Austen, in order to test whether she was consistent in her own writing. With this new dataset, we perform a chi-squared test. This gives us a p-value of 0.161. This p-value is > 0.05, meaning we cannot reject the null hypothesis and state that there is a significant difference between the different columns (books/chapters) in the data frame. 
+After the precondition for the chi-squared test is verified, we create a subset with only the books/chapters that were written by Austen, to test whether she was consistent in her own writing. With this new dataset, we perform a chi-squared test. This gives us a p-value of 0.161. This p-value is > 0.05, meaning we cannot reject the null hypothesis and state that there is a significant difference between the different columns (books/chapters) in the data frame. 
 
 ```{r}
 df_1 <- austen[c("Sense","Emma", "Sand1")]
@@ -267,11 +266,11 @@ Next, we will determine where the main inconsistencies lay. Inconsistencies can 
 residuals(austen_chi_1)
 ```
 
-The inconsistencies lay in Sense in the words 'without' and 'a', in Emma the main inconsistency was the word 'without' and lastly, in Sanditon the two main inconsistencies were the words 'that' and 'a'. The sign of the residuals indicate whether a word has been used more often or less often compared to the other books.
+The inconsistencies lay in Sense in the words 'without' and 'a', in Emma the main inconsistency was the word 'without', and lastly, in Sanditon the two main inconsistencies were the words 'that' and 'a'. The sign of a residual indicates whether a word has been used more often or less often compared to the other books.
 
 ## Exercise 1.4.c
 
-To check whether the admirer was successfully imitating Austen's writing style, we can compare the chapters from the Sanditon book. For this, we made a new data frame and performed another chi-squared test. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
+To check whether the admirer was successfully imitating Austen's writing style, we can compare the chapters from the Sanditon book. For this, we made a new data frame and performed another chi-squared test. Here the p-value was 0.131. This p-value is greater than 0.05, meaning we can not say there is a significant difference between the chapters written by Austen and her admirer based on the given data. Moreover, the condition of the chi-squared was met because all cells of the expected table were greater than 5. 
 ```{r}
 df_2 <- austen[c("Sand1", "Sand2")]
 austen_chi_2 = chisq.test(df_2)
