@@ -1,0 +1,132 @@
+---
+title: "Assignment 2 - Group 4"
+author: "Katrin Grunert, Carmen Byrne Salsas, Bono Lardinois"
+date: "14 October 2022"
+output:
+  html_document:
+    df_print: paged
+fontsize: 11pt
+highlight: tango
+---
+
+`r sat = read.table("sat.txt",header=TRUE)`
+`r tree = read.table("treeVolume.txt",header=TRUE)`
+
+# Exercise 2.1
+
+## Exercise 2.1.a
+
+Text here
+
+```{r,echo=FALSE,fig.height=3.5}
+#code here
+```
+
+## Exercise 2.1.b
+
+Text here
+
+```{r, echo=FALSE}
+#code here
+```
+
+## Exercise 2.1.c
+
+Text here
+
+```{r}
+#code here
+```
+## Exercise 2.1.d
+
+Text here
+
+```{r}
+#code here
+```
+
+# Exercise 2.2
+## Exercise 2.2.a
+
+Text here
+```{r}
+#code here
+```
+
+## Exercise 2.2.b
+
+Text here
+
+```{r}
+#code here
+```
+
+## Exercise 2.2.c
+
+Text here
+
+```{r}
+#code here
+```
+
+
+# Exercise 2.3
+## Exercise 2.3.a
+
+Text here
+
+```{r}
+#code here
+```
+
+
+## Exercise 2.3.b
+
+Text here
+
+```{r}
+#code here
+```
+
+
+## Exercise 2.3.c
+
+Text here
+
+```{r}
+#code here
+```
+
+# Exercise 2.4
+## Exercise 2.4.a
+
+Text here
+
+```{r}
+#code here
+```
+
+## Exercise 2.4.b
+
+Text here
+
+```{r}
+#code here
+```
+
+# Exercise 2.5
+## Exercise 2.5.a
+
+Text here
+
+```{r}
+#code here
+```
+
+## Exercise 2.5.b
+
+Text here
+
+```{r}
+#code here
+```
