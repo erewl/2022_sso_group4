@@ -94,20 +94,13 @@ The cheapest diet that fulfills these constraints consists out of $7.72$ serving
 
 ## Exercise 2.3.b
 
-Text here
-
-```{r}
-#code here
-```
+I think my calculations for this exercise in 02_assignment_02_03.xslxare not correct yet :(
 
 
 ## Exercise 2.3.c
 
-Text here
-
-```{r}
-#code here
-```
+Using an ILO model, we add the constraint of using no fractions when calculating the cheapest diet.
+The cheapest diet consists out of $9$ servings of potatos and $9$ servings of peanut butter, and has a prize of $2.43$ per serving. More potatos are now required to compensate for the rounded down amount of peanut butter servings.
 
 # Exercise 2.4
 ## Exercise 2.4.a
