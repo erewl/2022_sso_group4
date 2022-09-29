@@ -1,10 +1,9 @@
 ---
 title: "Assignment 2 - Group 4"
-author: "Katrin Grunert, Carmen Byrne Salsas, Bono Lardinois"
+author: "Katrin Grunert (13914103), Carmen Byrne Salsas (12968900), Bono Lardinois (11713364)"
 date: "14 October 2022"
 output:
-  html_document:
-    df_print: paged
+  pdf_document: default
 fontsize: 11pt
 highlight: tango
 ---
@@ -73,11 +72,24 @@ Text here
 # Exercise 2.3
 ## Exercise 2.3.a
 
-Text here
+The decision variables for this optimization problem are defined as quantities of the following products:
 
-```{r}
-#code here
-```
+$x_1 = Carrots; x_2 = Potatos; x_3 = Bread; x_4 = Cheese; x_5 = PeanutButter$
+
+Each product has the corresponding nutritional values: $calories_i; fat_i; protein_i; carbs_i$
+These nutritional values are used to define the decision variables below:
+
+1. $(\sum_{i=1}^{n=5} calories_i*x_i ) \geq 2000$
+1. $(\sum_{i=1}^{n=5} fat_i*x_i )  \geq 50$
+1. $(\sum_{i=1}^{n=5} protein_i*x_i )  \geq 250$
+1. $(\sum_{i=1}^{n=5} carbs_i*x_i)  \geq 200$
+
+
+Objective is to minimize the prize:
+
+$min(\sum_{i=1}^{n=5} price_i*x_i)$
+
+The cheapest diet that fulfills these constraints consists out of $7.72$ servings of potatos and $9.28$ servings of peanut butter, and has a prize of $2.32$ per serving.
 
 
 ## Exercise 2.3.b
