@@ -127,11 +127,15 @@ $min 10*x_{11} + 0*x{12} + 20*x{13} + 11*x{14} \\
 
 ## Exercise 2.4.b
 
-Text here
+Each transportation edge has an initial cost of 100. 
 
-```{r}
-#code here
-```
+For this we will use the same constraints as in 2.4.a, but adding the additional cost to the Objective:
+
+TODO ?????
+
+$min 10*x_{11} + 0*x{12} + 20*x{13} + 11*x{14} \\
+ + 12*x{21} + 7*x{22} + 9*x{23} + 20*x{24} \\\
+  + 0*x{31} + 14*x{32} + 16*x{33} + 18*x{34} $
 
 # Exercise 2.5
 ## Exercise 2.5.a
