@@ -105,11 +105,25 @@ The cheapest diet consists out of $9$ servings of potatos and $9$ servings of pe
 # Exercise 2.4
 ## Exercise 2.4.a
 
-Text here
+The transportation problem was solved using a LO Model. The cheapest transportation plan that fuflfills all demand and respects available supplies costs 460€
 
-```{r}
-#code here
-```
+Constraints are defined as:
+
+1. $ x_{11} + x_{12} + x_{13} + x_{14} \leq 20 $
+1. $ x_{21} + x_{22} + x_{23} + x_{24} \leq 25 $
+1. $ x_{31} + x_{32} + x_{33} + x_{34} \leq 15 $
+1. $ x_{11} + x_{21} + x_{31} \geq 10 $
+1. $ x_{12} + x_{22} + x_{32} \geq 15 $
+1. $ x_{13} + x_{23} + x_{33} \geq 15 $
+1. $ x_{14} + x_{24} + x_{34} \geq 20 $
+1. $ x_{ij} \geq 0, i = 1,2,3, j = 1,2,3,4$
+
+Objective is to find the cheapest transportation plan, such that:
+
+$min 10*x_{11} + 0*x{12} + 20*x{13} + 11*x{14} \\
+ + 12*x{21} + 7*x{22} + 9*x{23} + 20*x{24} \\\
+  + 0*x{31} + 14*x{32} + 16*x{33} + 18*x{34} $
+
 
 ## Exercise 2.4.b
 
