@@ -1,4 +1,3 @@
-**/*.pdf
 .RData
 .RHistory
 .DS_Store
