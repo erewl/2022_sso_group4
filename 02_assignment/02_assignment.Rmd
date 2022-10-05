@@ -120,22 +120,24 @@ Constraints are defined as:
 
 Objective is to find the cheapest transportation plan, such that:
 
-$min 10*x_{11} + 0*x{12} + 20*x{13} + 11*x{14} \\
- + 12*x{21} + 7*x{22} + 9*x{23} + 20*x{24} \\\
-  + 0*x{31} + 14*x{32} + 16*x{33} + 18*x{34} $
+$ min 10 x_{11} + 0x{12} + 20x{13} + 11x{14} \\ + 12x{21} + 7x{22} + 9x{23} + 20x{24} \\ + 0x{31} + 14x{32} + 16x{33} + 18x{34} $
 
 
 ## Exercise 2.4.b
 
 Each transportation edge has an initial cost of 100. 
 
-For this we will use the same constraints as in 2.4.a, but adding the additional cost to the Objective:
+For this we will use the same constraints as in 2.4.a plus a decision contraint:
 
-TODO ?????
+$ y_{ij} = \begin{cases} 1 &\text{if } x_{ij} \gt 0 \\ 0 &\text{else } \end{cases}  $
 
-$min 10*x_{11} + 0*x{12} + 20*x{13} + 11*x{14} \\
- + 12*x{21} + 7*x{22} + 9*x{23} + 20*x{24} \\\
-  + 0*x{31} + 14*x{32} + 16*x{33} + 18*x{34} $
+The objective stays also the same but also incorporates the additional cost for transporting goods from a source to a destination.
+
+$ min \displaystyle\sum_{i=1}^{n=3} \displaystyle\sum_{j=1}^{m=4} x_{ij} + 100y_{ij} $
+
+where $ y_{ij} $ is a binary decision variable whether edge $ x_{ij} $ has been used or not and adds the additional cost respectively.
+
+With these fixed costs, the cheapest price for the transportation of all goods to the requested destinations is 1060€
 
 # Exercise 2.5
 ## Exercise 2.5.a
