@@ -8,8 +8,10 @@ fontsize: 11pt
 highlight: tango
 ---
 
-`r sat = read.table("sat.txt",header=TRUE)`
-`r tree = read.table("treeVolume.txt",header=TRUE)`
+```{r,echo=FALSE,fig.height=3.5}
+sat = read.table("sat.txt",header=TRUE)
+tree = read.table("treeVolume.txt",header=TRUE)
+```
 
 # Exercise 2.1
 
@@ -109,18 +111,18 @@ The transportation problem was solved using a LO Model. The cheapest transportat
 
 Constraints are defined as:
 
-1. $ x_{11} + x_{12} + x_{13} + x_{14} \leq 20 $
-1. $ x_{21} + x_{22} + x_{23} + x_{24} \leq 25 $
-1. $ x_{31} + x_{32} + x_{33} + x_{34} \leq 15 $
-1. $ x_{11} + x_{21} + x_{31} \geq 10 $
-1. $ x_{12} + x_{22} + x_{32} \geq 15 $
-1. $ x_{13} + x_{23} + x_{33} \geq 15 $
-1. $ x_{14} + x_{24} + x_{34} \geq 20 $
-1. $ x_{ij} \geq 0, i = 1,2,3, j = 1,2,3,4$
+1. $x_{11} + x_{12} + x_{13} + x_{14} \leq 20$
+1. $x_{21} + x_{22} + x_{23} + x_{24} \leq 25$
+1. $x_{31} + x_{32} + x_{33} + x_{34} \leq 15$
+1. $x_{11} + x_{21} + x_{31} \geq 10$
+1. $x_{12} + x_{22} + x_{32} \geq 15$
+1. $x_{13} + x_{23} + x_{33} \geq 15$
+1. $x_{14} + x_{24} + x_{34} \geq 20$
+1. $x_{ij} \geq 0, i = 1,2,3, j = 1,2,3,4$
 
 Objective is to find the cheapest transportation plan, such that:
 
-$ min 10 x_{11} + 0x{12} + 20x{13} + 11x{14} \\ + 12x{21} + 7x{22} + 9x{23} + 20x{24} \\ + 0x{31} + 14x{32} + 16x{33} + 18x{34} $
+$min 10 x_{11} + 0x{12} + 20x{13} + 11x{14} \\ + 12x{21} + 7x{22} + 9x{23} + 20x{24} \\ + 0x{31} + 14x{32} + 16x{33} + 18x{34}$
 
 
 ## Exercise 2.4.b
@@ -129,13 +131,19 @@ Each transportation edge has an initial cost of 100.
 
 For this we will use the same constraints as in 2.4.a plus a decision contraint:
 
-$ y_{ij} = \begin{cases} 1 &\text{if } x_{ij} \gt 0 \\ 0 &\text{else } \end{cases}  $
+$$
+y_{ij} = 
+\begin{cases} 
+  1 &\text{if } x_{ij} > 0\\
+  0 &\text{else } 
+\end{cases}
+$$
 
 The objective stays also the same but also incorporates the additional cost for transporting goods from a source to a destination.
 
-$ min \displaystyle\sum_{i=1}^{n=3} \displaystyle\sum_{j=1}^{m=4} x_{ij} + 100y_{ij} $
+$min \displaystyle\sum_{i=1}^{n=3} \displaystyle\sum_{j=1}^{m=4} c_{ij} x_{ij} + 100y_{ij}$
 
-where $ y_{ij} $ is a binary decision variable whether edge $ x_{ij} $ has been used or not and adds the additional cost respectively.
+where $y_{ij}$ is a binary decision variable whether edge $x_{ij}$ has been used or not and adds the additional cost respectively.
 
 With these fixed costs, the cheapest price for the transportation of all goods to the requested destinations is 1060€
 
