@@ -149,17 +149,39 @@ With these fixed costs, the cheapest price for the transportation of all goods t
 
 # Exercise 2.5
 ## Exercise 2.5.a
+To find the cheapest solution to this personal scheduling problem, an ILO model was used. The ILO model is de the best model to use because there can't be any half-employees. After running the excel optimization solver, the cheapest schedule would be 3,296.00 euros. The objective and constraint can be found below. The full excel sheet can be found in the Appendix. Here it can be seen when the shift needs to start and at what time.
 
-Text here
+__Outline of the ILO model:__ \
 
-```{r}
-#code here
-```
+2 types of shifts: \
+
+* 4-hour, 24 euro per hour (96 euro total)
+* 8-hour (not inlcluding break of 0.5 hour), 20 euro per hour (160 euro total)
+
+__Objective:__ (minimize the costs) \
+min(∑(number of 4 hour shifts) * 96 + ∑(number of 8 hour shifts) * 160) \
+
+__Decision variable:__ \
+x~i~ = number of staffers (4 or 8 hour shift) per half hour \
+
+__Constraints:__
+The number of worker had to be Scheduled~u~ >= Required~u~ \
+i = 1, 2, ..., 25 \
+u = 1, 2, ..., 24 \
+x~i~ ∈ 0, 1, 2, ...
 
 ## Exercise 2.5.b
+In the new problem, two things changed compared to the previous problem. First, now there were only 8-hour shifts. Second, the "required staffing" is now "demanded staffing", suggesting that it is not necessarily to be fulfilled anymore. This changed the layout of the excel sheet together with several constraints. The excel sheet is displayed in the Appendix; the ILO model is presented below.
 
-Text here
+__Objective:__ (minimizes the sum of absolute differences between the demanded and scheduled staffing) \
+min(∑(demanded staffing for each half hour) - ∑(scheduled staffing for each half hour))
 
-```{r}
-#code here
-```
+__Decision variable:__ \
+x~i~ = number of scheduled staffing per half hour. Earliest start 9:00 latest start 12:30.
+
+__Constraints:__ \
+The number of Scheduled workers had to be smaller or equal than the Demanded workers:\
+workers had to be Scheduled~u~ <= Demanded~u~ \
+i = 1, 2, ..., 8 \
+u = 1, 2, ..., 24 \
+x~i~ ∈ 0, 1, 2, ...
